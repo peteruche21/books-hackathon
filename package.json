@@ -1,0 +1,14 @@
+{
+  "name": "third-book",
+  "version": "1.0.0",
+  "description": "self soveriegn book store for the third web",
+  "main": "index.js",
+  "repository": "git@github.com:peteruche21/books-hackathon.git",
+  "author": "peter anyaogu <anyaogupeter601@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/store",
+    "packages/contract"
+  ]
+}
