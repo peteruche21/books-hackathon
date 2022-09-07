@@ -1,0 +1,33 @@
+  
+  .landing {
+    height: 100vh;
+    background-image: url("../asset/book-landing.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .container {
+    height: inherit;
+    width: inherit;
+    display: flex;
+    align-items: center;
+    background-color: rgb(0,0,128, 0.3);
+    justify-content: center;
+  }
+
+  .container button {
+    box-shadow: none;
+    width: 300px;
+    height: 40px;
+    background-color: #405cf5;
+    color: #fff;
+    margin-bottom: 100px;
+    cursor: pointer;
+    font-weight: bolder;
+    border-radius: 25px;
+    border-color: #fff;
+    box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px gray;
+    letter-spacing: 1.3px;  
+  }
+  
