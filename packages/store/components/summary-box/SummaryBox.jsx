@@ -3,7 +3,7 @@ import React from 'react'
 import Box from '../box/Box'
 import { buildStyles, CircularProgressbarWithChildren } from 'react-circular-progressbar'
 import { colors } from '../../constants'
-import { Line } from 'react-chartjs-2'
+
 import {
     Chart as ChartJS,
     CategoryScale,
