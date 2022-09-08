@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react'
-//import './sidebar.scss'
-import Link from 'next/link'
+import { signOut } from 'next-auth/react'
 import { useRouter } from 'next/router'
-
 import sidebarNav from './sidebarNav'
-import Image from 'next/image'
 
 const Sidebar = () => {
     const [activeIndex, setActiveIndex] = useState(0)
@@ -52,7 +49,10 @@ const Sidebar = () => {
                     <div className="sidebar__menu__item__icon">
                         <i className='bx bx-log-out'></i>
                     </div>
-                    <div className="sidebar__menu__item__txt">
+                    <div  onClick={() => {
+                        signOut();
+                       return window.location.href = "/";
+                    }}  className="sidebar__menu__item__txt">
                         Logout
                     </div>
                 </div>

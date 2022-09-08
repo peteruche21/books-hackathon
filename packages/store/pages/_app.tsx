@@ -1,15 +1,34 @@
 import '../styles/_globals.scss'
-//import '../assets/libs/boxicons-2.1.1/css/boxicons.min.css'
-//import '../styles/App.scss'
-
 import type { AppProps } from 'next/app'
+import {
+  createClient,
+  configureChains,
+  defaultChains,
+  WagmiConfig,
+} from "wagmi";
+import { publicProvider } from "wagmi/providers/public";
+import { SessionProvider } from "next-auth/react";
 
+const { provider, webSocketProvider } = configureChains(defaultChains, [
+  publicProvider(),
+]);
+
+const client = createClient({
+  provider,
+  webSocketProvider,
+  autoConnect: true,
+});
 
 function MyApp({ Component, pageProps }: AppProps) {
       
   return (
-       <Component {...pageProps} />
-      
+    <div>
+    <WagmiConfig client={client}>
+    <SessionProvider session={pageProps.session} refetchInterval={0}>
+      <Component {...pageProps} />
+    </SessionProvider>
+  </WagmiConfig>
+  </div>
   ) 
 }
 
