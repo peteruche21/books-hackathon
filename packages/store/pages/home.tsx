@@ -1,7 +1,10 @@
 import React from 'react'
 import { Bar } from 'react-chartjs-2'
 import Box from '../components/box/Box'
-// import DashboardWrapper, { DashboardWrapperMain, DashboardWrapperRight } from '../components/dashboard-wrapper/DashboardWrapper'
+import { getSession } from 'next-auth/react';
+import { GetServerSidePropsContext } from "next";
+import type { NextPage } from 'next';
+import type { IUser } from '../components/utils/types';
 import SummaryBox from '../components/summary-box/SummaryBox'
 import { colors, data } from '../constants'
 import Layout from "../layout/MainLayout"
@@ -26,9 +29,12 @@ ChartJS.register(
     Legend
 )
 
-const Dashboard = () => {
+
+
+const Dashboard: NextPage<IUser> = ({user}) => {
+    
     return (
-        <Layout>
+        <Layout user={user.address}>
                 <div className='container-fluid'>
                 <div className="row">
                     <div className="col-12 col-md-12">
@@ -50,9 +56,7 @@ const Dashboard = () => {
                         </Box>
                     </div>
                 </div>
-                </div>
-        
-           
+                </div>                   
                 </Layout>
     )
 }
@@ -114,3 +118,23 @@ const RevenueByMonthsChart = () => {
         </>
     )
 }
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+    const session = await getSession(context);
+    
+    // redirect if not authenticated
+    if (!session) {
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false,
+            },
+        };
+    }
+
+    return {
+        props: { user: session.user },
+    };
+}
+
+

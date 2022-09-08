@@ -9,5 +9,12 @@ declare let process: {
     };
   };
 
+ export interface IUser {
+    user: {
+            address: string,
+            profileId: string,
+            signature: string
+    }
+}
 
   export default process;

@@ -3,12 +3,12 @@ import Head from 'next/head'
 import Sidebar from '../components/sidebar/Sidebar'
 import TopNav from '../components/topnav/TopNav'
 
-
 interface P {
     children: React.ReactNode
+    user?: string
 }
 
-const MainLayout = ({children} : P) => {
+const MainLayout = ({children, user} : P) => {
     return (
         <>
         <Head>
@@ -26,7 +26,7 @@ const MainLayout = ({children} : P) => {
             <Sidebar />
             <div className="main">
                 <div className="main__content">
-                     <TopNav /> 
+                     <TopNav user={user} /> 
                     {children}
                 </div>
             </div>

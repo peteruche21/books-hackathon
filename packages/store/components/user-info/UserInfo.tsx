@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-const UserInfo = ({ user }) => {
+const UserInfo = ({ user }: any) => {
     return (
         <div className='user-info'>
             <div className="icon_size">
@@ -9,10 +9,11 @@ const UserInfo = ({ user }) => {
                 
             </div>
             <div className="user-info__name">
-                <span>{"Ndu Ifeanyi"}</span>
+                <span>{user}</span>
             </div>
         </div>
     )
 }
+
 
 export default UserInfo

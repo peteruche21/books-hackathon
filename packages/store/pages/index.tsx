@@ -64,7 +64,7 @@ const Landing: NextPage<P> = (props) => {
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getSession(context);
-  
+
   if (session) {
     return {
       redirect: {
