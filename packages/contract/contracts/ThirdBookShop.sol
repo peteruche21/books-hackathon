@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-// THIS CONTRACT USES UN-AUDITED CODE.
+// THIS CONTRACT IS UN-AUDITED!!.
 // FOR DEMO PURPOSES!!!
 
 pragma solidity 0.8.10;
@@ -50,7 +50,7 @@ contract ThirdBookShop is ERC1155Holder, Ownable {
   uint256 private totalFeesPaid; // big number 10**18
   uint256 private totalShopClaim; // big number 10**6
   mapping(uint256 => address) private s_feeReciever; // tokenId to fee receiver
-  mapping(uint256 => uint256) private s_price; // token id tp price in bignumber. eg 5$ === 5 * 10**6
+  mapping(uint256 => uint256) public s_price; // token id tp price in bignumber. eg 5$ === 5 * 10**6
   mapping(address => uint256) private s_feeRecieverClaim; // seller to total tokens recieved
 
   constructor(

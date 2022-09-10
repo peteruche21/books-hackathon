@@ -1,15 +1,20 @@
-import chai from "chai";
+import { expect } from "chai";
 
 describe("thirdbook shop", () => {
   beforeEach(async () => {
     // Todo
   });
-  describe("when publishing book", () => {
+  describe("after deploying book shop", () => {
     it("does something", async () => {
       // Todo
     });
   });
-  describe("when purchasing book", () => {
+  describe("when publishing a book", () => {
+    it("does something", async () => {
+      // Todo
+    });
+  });
+  describe("when purchasing a book", () => {
     it("does something", async () => {
       // Todo
     });
