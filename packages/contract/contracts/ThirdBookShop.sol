@@ -106,7 +106,8 @@ contract ThirdBookShop is ERC1155Holder, Ownable {
     // approve before call
     bool success = usdTokenContract.transferFrom(msg.sender, address(this), s_price[_tokenId]);
     if (success) {
-      s_feeRecieverClaim[msg.sender] += s_price[_tokenId];
+      // update book publisher's usdc claim
+      s_feeRecieverClaim[s_feeReciever[_tokenId]] += s_price[_tokenId];
       // may switch to mint.
       bookContract.safeTransferFrom(address(this), msg.sender, _tokenId, 1, "");
       emit PurchasedBook(_tokenId, msg.sender, s_price[_tokenId]);
@@ -129,7 +130,7 @@ contract ThirdBookShop is ERC1155Holder, Ownable {
     emit ChangedShopFee(shopFee, _newShopFee);
   }
 
-  // may boot this contract later
+  // may boot this method later
   function claimTokens() public {
     uint256 amount = s_feeRecieverClaim[msg.sender];
     s_feeRecieverClaim[msg.sender] -= amount;
