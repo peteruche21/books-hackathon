@@ -26,9 +26,7 @@ export interface Idata {
   description: string;
   bookpdf: any;
   bookcover: any;
-  bookname: string;
   user: string;
-  paid: boolean;
   genre: string;
   price: string;
 }
@@ -89,8 +87,8 @@ export const createBook = createAsyncThunk<Idata[], Idata>(
   async (data, { rejectWithValue }) => {
     try {
       const res = await bookService.createBook(data);
-      if (res.data && res.data.length > 0) {
-        return res.data;
+      if (res) {
+        return res;
       }
     } catch (error) {
       errorHandler(error, rejectWithValue);

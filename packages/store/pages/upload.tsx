@@ -1,25 +1,32 @@
-import React, { FormEventHandler, useState } from "react";
+import React, { useState } from "react";
 import type { NextPage } from "next";
 import styles from "../styles/Upload.module.scss";
 import Layout from "../layout/MainLayout";
 import { FileUploader } from "react-drag-drop-files";
 import { getServerSideProps } from "./home";
 import type { IUser } from "../components/utils/types";
+import { AppDispatch, RootState } from "../store/store";
+import { createBook } from "../features/bookThunk";
+import { useDispatch, useSelector } from "react-redux";
 
 const fileTypes = ["JPG", "PNG", "GIF"];
 const bookTypes = ["PDF"];
 
 const Upload: NextPage<IUser> = ({ user }) => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const { error, Loading, data, message } = useSelector(
+    (state: RootState) => state.bookReducer
+  );
+
   const [imgFile, setImgFile] = useState(null);
   const [bookFile, setBookFile] = useState(null);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    bookpdf: {},
+    bookpdf: "",
     bookcover: "",
-    bookname: "",
     user: "",
-    paid: false,
     genre: "",
     price: "",
   });
@@ -31,8 +38,6 @@ const Upload: NextPage<IUser> = ({ user }) => {
 
   const handleBook = (file: any) => {
     setBookFile(file);
-    let { name } = file;
-    setFormData({ ...formData, bookname: name });
   };
 
   const handleChange = (e: any) => {
@@ -41,12 +46,24 @@ const Upload: NextPage<IUser> = ({ user }) => {
   };
 
   const handleSubmit = (e: any) => {
-    e.stopPropagation();
     e.preventDefault();
+    if (
+      !formData.bookcover ||
+      !formData.bookpdf! ||
+      !formData.title ||
+      !formData.price
+    ) {
+      return;
+    }
+
     let data = { ...formData };
     data.user = user.address;
     data.bookpdf = bookFile as any;
     data.bookcover = imgFile as any;
+    console.log(data);
+
+    dispatch(createBook(data));
+    console.log("=======");
     console.log(data);
   };
 
