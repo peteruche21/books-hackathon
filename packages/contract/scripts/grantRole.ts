@@ -1,6 +1,5 @@
 import { ethers } from "hardhat";
 import { deployments } from "hardhat";
-// import {ThirdBook, ThirdBookShop} from "../typechain";
 
 const main = async (): Promise<void> => {
   await deployments.fixture(["all"], { keepExistingDeployments: true });
