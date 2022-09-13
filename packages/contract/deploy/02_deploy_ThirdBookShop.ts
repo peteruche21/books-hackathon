@@ -1,17 +1,21 @@
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { DeployFunction } from "hardhat-deploy/types";
-import { ethers } from "hardhat";
+import { ethers, network } from "hardhat";
 
 const deployThirdBookShop: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const { getNamedAccounts, deployments } = hre;
   const { deployer } = await getNamedAccounts();
   const { deploy, log } = deployments;
 
+  const chainId: number | undefined = network.config.chainId;
+
   let UsdTokenAddress: string | undefined;
   let ThirdBookAddress: string | undefined;
 
+  const CircleUSDCGoerli: string = "0x07865c6e87b9f70255377e024ace6630c1eaa37f";
+
   const UsdToken = await deployments.get("USD");
-  UsdTokenAddress = UsdToken.address;
+  UsdTokenAddress = chainId === 5 ? CircleUSDCGoerli : UsdToken.address;
   const BookContract = await deployments.get("ThirdBook");
   ThirdBookAddress = BookContract.address;
 
