@@ -1,3 +1,4 @@
+import React from "react";
 import { GetServerSidePropsContext } from "next";
 import { getSession } from "next-auth/react";
 import baseApi from "../services/baseApi";
@@ -19,6 +20,7 @@ const Landing: NextPage<P> = (props) => {
 
   const handleAuth = async (e: any) => {
     e.preventDefault();
+
     if (isConnected) {
       await disconnectAsync();
     }

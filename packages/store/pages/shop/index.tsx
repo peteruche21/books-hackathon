@@ -21,7 +21,7 @@ const Shop: NextPage<IUser> = ({ user }) => {
         }}
         className="container-fluid"
       >
-        <h4 className="text-primary text-center m-4">Shop books</h4>
+        <h4 className="text-primary text-center m-4">Book shop</h4>
         <p className="text-center text-muted">
           Get your favorite books from bookstore blockchain
         </p>

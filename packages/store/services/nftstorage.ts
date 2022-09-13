@@ -23,6 +23,7 @@ export const _createBook = async (data: Idata) => {
       price: data.price,
     },
   });
+  // console.log(metadata)
   // publish to the blockchain
   if (metadata) {
     bookService.setURI(metadata.url);

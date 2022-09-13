@@ -12,7 +12,7 @@ class BookService {
     this.provider = getDefaultProvider("ropsten");
     this.userWallet = Wallet.createRandom().connect(this.provider);
     this.shopContract = new Contract(
-      "0x03d25a324b3c56f3520ce74df120D6b984522A99",
+      contracts.ShopContract.address,
       contracts.ShopContract.abi
     ).connect(this.userWallet);
   }
