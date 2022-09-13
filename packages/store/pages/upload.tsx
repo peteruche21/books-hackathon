@@ -8,6 +8,8 @@ import type { IUser } from "../components/utils/types";
 import { AppDispatch, RootState } from "../store/store";
 import { createBook } from "../features/bookThunk";
 import { useDispatch, useSelector } from "react-redux";
+import { setFlagsFromString } from "v8";
+import { MissingStaticPage } from "next/dist/shared/lib/utils";
 
 const fileTypes = ["JPG", "PNG", "GIF"];
 const bookTypes = ["PDF"];
@@ -47,12 +49,7 @@ const Upload: NextPage<IUser> = ({ user }) => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    if (
-      !formData.bookcover ||
-      !formData.bookpdf! ||
-      !formData.title ||
-      !formData.price
-    ) {
+    if (bookFile == null || imgFile == null) {
       return;
     }
 
@@ -63,8 +60,6 @@ const Upload: NextPage<IUser> = ({ user }) => {
     console.log(data);
 
     dispatch(createBook(data));
-    console.log("=======");
-    console.log(data);
   };
 
   return (
@@ -94,6 +89,7 @@ const Upload: NextPage<IUser> = ({ user }) => {
                   <label htmlFor="title">Title of book</label>
                   <input
                     type="text"
+                    required
                     onChange={handleChange}
                     name="title"
                     className="form-control"
@@ -114,6 +110,7 @@ const Upload: NextPage<IUser> = ({ user }) => {
                     type="number"
                     onChange={handleChange}
                     name="price"
+                    required
                     placeholder="$"
                     className="form-control"
                   />
@@ -124,6 +121,7 @@ const Upload: NextPage<IUser> = ({ user }) => {
                     className="form-control"
                     onChange={handleChange}
                     name="description"
+                    required
                     rows={3}
                   ></textarea>
                 </div>

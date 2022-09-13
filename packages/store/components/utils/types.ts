@@ -6,7 +6,7 @@ declare let process: {
     BASE_API: string;
     PERSONA: string;
     TOKEN: string;
-    NFT_APIKEY: string;
+    NEXT_APIKEY: string;
   };
 };
 

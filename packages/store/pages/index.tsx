@@ -1,14 +1,14 @@
 import { GetServerSidePropsContext } from "next";
 import { getSession } from "next-auth/react";
 import baseApi from "../services/baseApi";
-import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet'
+import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
 import { signIn } from "next-auth/react";
 import { useAccount, useConnect, useSignMessage, useDisconnect } from "wagmi";
-import type { NextPage } from 'next';
-import styles from '../styles/Landing.module.scss'
+import type { NextPage } from "next";
+import styles from "../styles/Landing.module.scss";
 
 interface P {
-  message: string
+  message: string;
 }
 
 const Landing: NextPage<P> = (props) => {
@@ -20,47 +20,44 @@ const Landing: NextPage<P> = (props) => {
   const handleAuth = async (e: any) => {
     e.preventDefault();
     if (isConnected) {
-      await disconnectAsync()
+      await disconnectAsync();
     }
 
     const { account, chain } = await connectAsync({
       connector: new CoinbaseWalletConnector({
         options: {
-          appName: 'books.store',
+          appName: "books.store",
         },
       }),
-    })
+    });
 
-    const userData = { address: account, chain: chain.id, network: 'evm' }
+    const userData = { address: account, chain: chain.id, network: "evm" };
 
-    const { data } = await baseApi.post('/auth/request-message', userData) 
+    const { data } = await baseApi.post("/auth/request-message", userData);
 
-    const message = data.message
+    const message = data.message;
 
-    const signature = await signMessageAsync({ message })
-    
+    const signature = await signMessageAsync({ message });
+
     try {
-      await signIn('credentials', { message, signature, redirect: false});
+      await signIn("credentials", { message, signature, redirect: false });
       // redirect user to home;
       window.location.href = "/home";
     } catch (error) {
       return;
     }
-
   };
 
   return (
     <div className={styles.landing}>
       <div className={styles.container}>
         <form onSubmit={handleAuth}>
-        <button className='btn btn-primary'>
-            {props.message}
-        </button>
+          <button className="btn btn-primary">{props.message}</button>
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getSession(context);
@@ -81,6 +78,4 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   };
 }
 
-
-export default Landing
-
+export default Landing;
