@@ -39,6 +39,7 @@ export interface Idata {
 
 export interface Ibook {
   data: Idata[];
+  url: string;
   purchases: Idata[];
   error: string;
   message: string;
@@ -46,7 +47,7 @@ export interface Ibook {
   Loading2: string;
 }
 
-export const getBooks = createAsyncThunk<any, void>(
+export const getBooks = createAsyncThunk<any, any>(
   "getBooks",
   async (data, { rejectWithValue }) => {
     try {
@@ -60,7 +61,7 @@ export const getBooks = createAsyncThunk<any, void>(
   }
 );
 
-export const getGenres = createAsyncThunk<any, string>(
+export const getGenres = createAsyncThunk<any, any>(
   "getGenres",
   async (data, { rejectWithValue }) => {
     try {
@@ -74,7 +75,7 @@ export const getGenres = createAsyncThunk<any, string>(
   }
 );
 
-export const boughtBooks = createAsyncThunk<any, string>(
+export const boughtBooks = createAsyncThunk<any, any>(
   "boughtBooks",
   async (data, { rejectWithValue }) => {
     try {
@@ -92,9 +93,9 @@ export const createBook = createAsyncThunk<any, Idata>(
   "createBook",
   async (data, { rejectWithValue }) => {
     try {
-      const res = await _createBook(data);
-      if (res) {
-        return res;
+      const metadataUrl = await _createBook(data);
+      if (metadataUrl) {
+        return metadataUrl;
       }
     } catch (error) {
       errorHandler(error, rejectWithValue);

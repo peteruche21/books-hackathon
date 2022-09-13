@@ -42,7 +42,7 @@ const Landing: NextPage<P> = (props) => {
     try {
       await signIn("credentials", { message, signature, redirect: false });
       // redirect user to home;
-      window.location.href = "/home";
+      window.location.href = "/shop";
     } catch (error) {
       return;
     }
@@ -65,7 +65,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   if (session) {
     return {
       redirect: {
-        destination: "/home",
+        destination: "/shop",
         permanent: false,
       },
     };

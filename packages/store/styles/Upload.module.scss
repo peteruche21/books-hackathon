@@ -1,15 +1,20 @@
-
 .disabled_btn {
-    cursor: not-allowed;
-    background-color: #cccccc;
+  cursor: not-allowed;
+  background-color: #cccccc;
 }
 
 .enabled_btn {
-    cursor: pointer;
+  cursor: pointer;
 }
 
-.create_container { 
-    background-color: "#ffffff";
-    padding: "20px";
-    border-radius: "10px"; 
+.create_container {
+  background-color: "#ffffff";
+  padding: "20px";
+  border-radius: "10px";
+}
+
+.center_container {
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }

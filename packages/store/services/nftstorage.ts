@@ -1,13 +1,15 @@
 import { NFTStorage, File } from "nft.storage";
 import process from "../components/utils/types";
-import books from "./baseApi";
+import type { Idata } from "../features/bookThunk";
+import bookService from "./blockchain.service";
 
 const client = new NFTStorage({
   token: process.env.NEXT_APIKEY,
 });
 
-export const _createBook = async (data: any) => {
+export const _createBook = async (data: Idata) => {
   let { name, type } = data.bookpdf;
+  // save to nft.storage
   const metadata = await client.store({
     name: data.title,
     description: data.description,
@@ -21,8 +23,10 @@ export const _createBook = async (data: any) => {
       price: data.price,
     },
   });
-  console.log("part-2====");
-  console.log(metadata);
+  // publish to the blockchain
+  if (metadata) {
+    bookService.setURI(metadata.url);
+  }
   return metadata;
 };
 

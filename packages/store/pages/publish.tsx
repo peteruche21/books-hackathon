@@ -3,13 +3,11 @@ import type { NextPage } from "next";
 import styles from "../styles/Upload.module.scss";
 import Layout from "../layout/MainLayout";
 import { FileUploader } from "react-drag-drop-files";
-import { getServerSideProps } from "./home";
+import { getServerSideProps } from "./shop";
 import type { IUser } from "../components/utils/types";
 import { AppDispatch, RootState } from "../store/store";
 import { createBook } from "../features/bookThunk";
 import { useDispatch, useSelector } from "react-redux";
-import { setFlagsFromString } from "v8";
-import { MissingStaticPage } from "next/dist/shared/lib/utils";
 
 const fileTypes = ["JPG", "PNG", "GIF"];
 const bookTypes = ["PDF"];
@@ -17,7 +15,7 @@ const bookTypes = ["PDF"];
 const Upload: NextPage<IUser> = ({ user }) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const { error, Loading, data, message } = useSelector(
+  const { error, Loading, data, url, message } = useSelector(
     (state: RootState) => state.bookReducer
   );
 
@@ -58,6 +56,7 @@ const Upload: NextPage<IUser> = ({ user }) => {
     data.bookpdf = bookFile as any;
     data.bookcover = imgFile as any;
     console.log(data);
+    console.log(url);
 
     dispatch(createBook(data));
   };
@@ -65,7 +64,7 @@ const Upload: NextPage<IUser> = ({ user }) => {
   return (
     <Layout user={user.address}>
       <div className="container m-2 mb-6 ">
-        <div className="row mb-6">
+        <div className={`${styles.center_container} row mb-6`}>
           <div
             style={{
               backgroundColor: "#ffff",
