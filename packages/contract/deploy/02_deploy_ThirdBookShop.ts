@@ -14,8 +14,11 @@ const deployThirdBookShop: DeployFunction = async function (hre: HardhatRuntimeE
 
   const CircleUSDCGoerli: string = "0x07865c6e87b9f70255377e024ace6630c1eaa37f";
 
-  const UsdToken = await deployments.get("USD");
-  UsdTokenAddress = chainId === 5 ? CircleUSDCGoerli : UsdToken.address;
+  if (chainId === 31337) {
+    const UsdToken = await deployments.get("USD");
+    UsdTokenAddress = UsdToken.address;
+  } else UsdTokenAddress = CircleUSDCGoerli;
+
   const BookContract = await deployments.get("ThirdBook");
   ThirdBookAddress = BookContract.address;
 

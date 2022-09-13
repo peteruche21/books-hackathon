@@ -1,8 +1,8 @@
-import { ethers } from "hardhat";
-import { deployments } from "hardhat";
+import { ethers, deployments, network } from "hardhat";
 
 const main = async (): Promise<void> => {
-  await deployments.fixture(["all"], { keepExistingDeployments: true });
+  if (network.config.chainId === 31337)
+    await deployments.fixture(["all"], { keepExistingDeployments: true });
 
   const nftContract = await deployments.get("ThirdBook");
   const shopContract = await deployments.get("ThirdBookShop");

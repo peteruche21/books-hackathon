@@ -9,7 +9,8 @@ const deployUsdToken: DeployFunction = async function (hre: HardhatRuntimeEnviro
 
   const chainId: number | undefined = network.config.chainId;
 
-  if (chainId !== 5) {
+  if (chainId === 31337) {
+    // deploy test usdc token only if on hardhat network
     log("deploying ERC20 USD Token Contract");
     const receipt = await deploy("USD", {
       from: deployer,
