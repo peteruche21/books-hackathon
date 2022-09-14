@@ -12,6 +12,8 @@ import "@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
 interface IERC1155MintableBurnable is IERC1155 {
+  function setTokenUri(uint256 tokenId, string memory uri) external;
+
   function mint(
     address account,
     uint256 id,
@@ -82,7 +84,11 @@ contract ThirdBookShop is ERC1155Holder, Ownable {
    * @param _amount - the amount of books to be published
    * @param _price - the price of this book  specified in (wei)
    */
-  function publish(uint256 _amount, uint256 _price) public payable {
+  function publish(
+    uint256 _amount,
+    uint256 _price,
+    string memory _uri
+  ) public payable {
     // shop fee only applies to book publishing
     // shop fee is collected in terms native token eth
     if (msg.value < shopFee) {
@@ -109,6 +115,10 @@ contract ThirdBookShop is ERC1155Holder, Ownable {
     // transfers a copy of newly minted books to the publisher
     bookContract.safeTransferFrom(address(this), msg.sender, tokenId, 1, "");
     emit PublishedBook(tokenId, msg.sender, _price);
+    // update token uri if uri is provided
+    if (bytes(_uri).length > 0) {
+      _setTokenUri(tokenId, _uri);
+    }
   }
 
   /**
@@ -149,6 +159,15 @@ contract ThirdBookShop is ERC1155Holder, Ownable {
     }
     bookContract.burn(msg.sender, _tokenId, _amount);
     emit BurntBook(_tokenId, msg.sender, _amount);
+  }
+
+  /**
+   * @notice sets the metadata uri for token of (tokenId)
+   * @param tokenId - token identifier
+   * @param _uri - token metadata uri
+   */
+  function _setTokenUri(uint256 tokenId, string memory _uri) public {
+    bookContract.setTokenUri(tokenId, _uri);
   }
 
   // complete. new shop fee in decimals 10 ** 18

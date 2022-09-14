@@ -10,10 +10,21 @@ contract ThirdBook is ERC1155, AccessControl, ERC1155Burnable, ERC1155Supply {
   bytes32 public constant URI_SETTER_ROLE = keccak256("URI_SETTER_ROLE");
   bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
 
+  mapping(uint256 => string) private _uris;
+
   constructor() ERC1155("") {
     _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
     _grantRole(URI_SETTER_ROLE, msg.sender);
     // _grantRole(MINTER_ROLE, msg.sender); owner may not implicitly be a minter
+  }
+
+  function uri(uint256 tokenId) public view override returns (string memory) {
+    return (_uris[tokenId]);
+  }
+
+  function setTokenUri(uint256 tokenId, string memory _uri) public onlyRole(MINTER_ROLE) {
+    require(bytes(_uris[tokenId]).length == 0, "uri cannot be overwritten");
+    _uris[tokenId] = _uri;
   }
 
   function setURI(string memory newuri) public onlyRole(URI_SETTER_ROLE) {
