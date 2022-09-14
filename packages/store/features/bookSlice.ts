@@ -78,7 +78,7 @@ const bookSlice = createSlice({
       state.Loading = "";
       if (payload) {
         state.url = payload.url;
-        state.data = payload.data;
+        state.data.push(payload.data);
       }
     });
     builder.addCase(createBook.rejected, (state, action) => {

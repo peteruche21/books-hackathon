@@ -11,6 +11,9 @@ import { AppDispatch, RootState } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
 
 const Shop: NextPage<IUser> = ({ user }) => {
+  const { error, Loading, data, url, message } = useSelector(
+    (state: RootState) => state.bookReducer
+  );
   return (
     <Layout user={user.address}>
       <div

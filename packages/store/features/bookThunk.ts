@@ -95,7 +95,8 @@ export const createBook = createAsyncThunk<any, Idata>(
     try {
       const metadata = await _createBook(data);
       if (metadata) {
-        return metadata;
+        console.log(metadata);
+        return;
       }
     } catch (error) {
       errorHandler(error, rejectWithValue);

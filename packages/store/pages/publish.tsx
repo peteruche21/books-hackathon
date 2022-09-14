@@ -59,7 +59,7 @@ const Upload: NextPage<IUser> = ({ user }) => {
     console.log(data);
     console.log(url);
 
-    dispatch(createBook(data));
+    return dispatch(createBook(data));
   };
 
   return (
