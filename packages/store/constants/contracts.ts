@@ -227,150 +227,8 @@ const contracts = {
     ],
   },
   BookContract: {
-    address: "0x6a274624223daA93d660a69D3b74b85eAc9fb3A2",
+    address: "0x9D0FfB77f552cb87DCf8D4ABBD4C63e14A7C924c",
     abi: [
-      {
-        inputs: [],
-        stateMutability: "nonpayable",
-        type: "constructor",
-      },
-      {
-        anonymous: false,
-        inputs: [
-          {
-            indexed: true,
-            internalType: "address",
-            name: "account",
-            type: "address",
-          },
-          {
-            indexed: true,
-            internalType: "address",
-            name: "operator",
-            type: "address",
-          },
-          {
-            indexed: false,
-            internalType: "bool",
-            name: "approved",
-            type: "bool",
-          },
-        ],
-        name: "ApprovalForAll",
-        type: "event",
-      },
-      {
-        anonymous: false,
-        inputs: [
-          {
-            indexed: true,
-            internalType: "bytes32",
-            name: "role",
-            type: "bytes32",
-          },
-          {
-            indexed: true,
-            internalType: "bytes32",
-            name: "previousAdminRole",
-            type: "bytes32",
-          },
-          {
-            indexed: true,
-            internalType: "bytes32",
-            name: "newAdminRole",
-            type: "bytes32",
-          },
-        ],
-        name: "RoleAdminChanged",
-        type: "event",
-      },
-      {
-        anonymous: false,
-        inputs: [
-          {
-            indexed: true,
-            internalType: "bytes32",
-            name: "role",
-            type: "bytes32",
-          },
-          {
-            indexed: true,
-            internalType: "address",
-            name: "account",
-            type: "address",
-          },
-          {
-            indexed: true,
-            internalType: "address",
-            name: "sender",
-            type: "address",
-          },
-        ],
-        name: "RoleGranted",
-        type: "event",
-      },
-      {
-        anonymous: false,
-        inputs: [
-          {
-            indexed: true,
-            internalType: "bytes32",
-            name: "role",
-            type: "bytes32",
-          },
-          {
-            indexed: true,
-            internalType: "address",
-            name: "account",
-            type: "address",
-          },
-          {
-            indexed: true,
-            internalType: "address",
-            name: "sender",
-            type: "address",
-          },
-        ],
-        name: "RoleRevoked",
-        type: "event",
-      },
-      {
-        anonymous: false,
-        inputs: [
-          {
-            indexed: true,
-            internalType: "address",
-            name: "operator",
-            type: "address",
-          },
-          {
-            indexed: true,
-            internalType: "address",
-            name: "from",
-            type: "address",
-          },
-          {
-            indexed: true,
-            internalType: "address",
-            name: "to",
-            type: "address",
-          },
-          {
-            indexed: false,
-            internalType: "uint256[]",
-            name: "ids",
-            type: "uint256[]",
-          },
-          {
-            indexed: false,
-            internalType: "uint256[]",
-            name: "values",
-            type: "uint256[]",
-          },
-        ],
-        name: "TransferBatch",
-        type: "event",
-      },
       {
         anonymous: false,
         inputs: [
@@ -409,53 +267,8 @@ const contracts = {
         type: "event",
       },
       {
-        anonymous: false,
-        inputs: [
-          {
-            indexed: false,
-            internalType: "string",
-            name: "value",
-            type: "string",
-          },
-          {
-            indexed: true,
-            internalType: "uint256",
-            name: "id",
-            type: "uint256",
-          },
-        ],
-        name: "URI",
-        type: "event",
-      },
-      {
-        inputs: [],
-        name: "DEFAULT_ADMIN_ROLE",
-        outputs: [
-          {
-            internalType: "bytes32",
-            name: "",
-            type: "bytes32",
-          },
-        ],
-        stateMutability: "view",
-        type: "function",
-      },
-      {
         inputs: [],
         name: "MINTER_ROLE",
-        outputs: [
-          {
-            internalType: "bytes32",
-            name: "",
-            type: "bytes32",
-          },
-        ],
-        stateMutability: "view",
-        type: "function",
-      },
-      {
-        inputs: [],
-        name: "URI_SETTER_ROLE",
         outputs: [
           {
             internalType: "bytes32",
@@ -493,30 +306,6 @@ const contracts = {
       {
         inputs: [
           {
-            internalType: "address[]",
-            name: "accounts",
-            type: "address[]",
-          },
-          {
-            internalType: "uint256[]",
-            name: "ids",
-            type: "uint256[]",
-          },
-        ],
-        name: "balanceOfBatch",
-        outputs: [
-          {
-            internalType: "uint256[]",
-            name: "",
-            type: "uint256[]",
-          },
-        ],
-        stateMutability: "view",
-        type: "function",
-      },
-      {
-        inputs: [
-          {
             internalType: "address",
             name: "account",
             type: "address",
@@ -545,133 +334,6 @@ const contracts = {
             type: "address",
           },
           {
-            internalType: "uint256[]",
-            name: "ids",
-            type: "uint256[]",
-          },
-          {
-            internalType: "uint256[]",
-            name: "values",
-            type: "uint256[]",
-          },
-        ],
-        name: "burnBatch",
-        outputs: [],
-        stateMutability: "nonpayable",
-        type: "function",
-      },
-      {
-        inputs: [
-          {
-            internalType: "uint256",
-            name: "id",
-            type: "uint256",
-          },
-        ],
-        name: "exists",
-        outputs: [
-          {
-            internalType: "bool",
-            name: "",
-            type: "bool",
-          },
-        ],
-        stateMutability: "view",
-        type: "function",
-      },
-      {
-        inputs: [
-          {
-            internalType: "bytes32",
-            name: "role",
-            type: "bytes32",
-          },
-        ],
-        name: "getRoleAdmin",
-        outputs: [
-          {
-            internalType: "bytes32",
-            name: "",
-            type: "bytes32",
-          },
-        ],
-        stateMutability: "view",
-        type: "function",
-      },
-      {
-        inputs: [
-          {
-            internalType: "bytes32",
-            name: "role",
-            type: "bytes32",
-          },
-          {
-            internalType: "address",
-            name: "account",
-            type: "address",
-          },
-        ],
-        name: "grantRole",
-        outputs: [],
-        stateMutability: "nonpayable",
-        type: "function",
-      },
-      {
-        inputs: [
-          {
-            internalType: "bytes32",
-            name: "role",
-            type: "bytes32",
-          },
-          {
-            internalType: "address",
-            name: "account",
-            type: "address",
-          },
-        ],
-        name: "hasRole",
-        outputs: [
-          {
-            internalType: "bool",
-            name: "",
-            type: "bool",
-          },
-        ],
-        stateMutability: "view",
-        type: "function",
-      },
-      {
-        inputs: [
-          {
-            internalType: "address",
-            name: "account",
-            type: "address",
-          },
-          {
-            internalType: "address",
-            name: "operator",
-            type: "address",
-          },
-        ],
-        name: "isApprovedForAll",
-        outputs: [
-          {
-            internalType: "bool",
-            name: "",
-            type: "bool",
-          },
-        ],
-        stateMutability: "view",
-        type: "function",
-      },
-      {
-        inputs: [
-          {
-            internalType: "address",
-            name: "account",
-            type: "address",
-          },
-          {
             internalType: "uint256",
             name: "id",
             type: "uint256",
@@ -688,103 +350,6 @@ const contracts = {
           },
         ],
         name: "mint",
-        outputs: [],
-        stateMutability: "nonpayable",
-        type: "function",
-      },
-      {
-        inputs: [
-          {
-            internalType: "address",
-            name: "to",
-            type: "address",
-          },
-          {
-            internalType: "uint256[]",
-            name: "ids",
-            type: "uint256[]",
-          },
-          {
-            internalType: "uint256[]",
-            name: "amounts",
-            type: "uint256[]",
-          },
-          {
-            internalType: "bytes",
-            name: "data",
-            type: "bytes",
-          },
-        ],
-        name: "mintBatch",
-        outputs: [],
-        stateMutability: "nonpayable",
-        type: "function",
-      },
-      {
-        inputs: [
-          {
-            internalType: "bytes32",
-            name: "role",
-            type: "bytes32",
-          },
-          {
-            internalType: "address",
-            name: "account",
-            type: "address",
-          },
-        ],
-        name: "renounceRole",
-        outputs: [],
-        stateMutability: "nonpayable",
-        type: "function",
-      },
-      {
-        inputs: [
-          {
-            internalType: "bytes32",
-            name: "role",
-            type: "bytes32",
-          },
-          {
-            internalType: "address",
-            name: "account",
-            type: "address",
-          },
-        ],
-        name: "revokeRole",
-        outputs: [],
-        stateMutability: "nonpayable",
-        type: "function",
-      },
-      {
-        inputs: [
-          {
-            internalType: "address",
-            name: "from",
-            type: "address",
-          },
-          {
-            internalType: "address",
-            name: "to",
-            type: "address",
-          },
-          {
-            internalType: "uint256[]",
-            name: "ids",
-            type: "uint256[]",
-          },
-          {
-            internalType: "uint256[]",
-            name: "amounts",
-            type: "uint256[]",
-          },
-          {
-            internalType: "bytes",
-            name: "data",
-            type: "bytes",
-          },
-        ],
-        name: "safeBatchTransferFrom",
         outputs: [],
         stateMutability: "nonpayable",
         type: "function",
@@ -825,17 +390,17 @@ const contracts = {
       {
         inputs: [
           {
-            internalType: "address",
-            name: "operator",
-            type: "address",
+            internalType: "uint256",
+            name: "tokenId",
+            type: "uint256",
           },
           {
-            internalType: "bool",
-            name: "approved",
-            type: "bool",
+            internalType: "string",
+            name: "_uri",
+            type: "string",
           },
         ],
-        name: "setApprovalForAll",
+        name: "setTokenUri",
         outputs: [],
         stateMutability: "nonpayable",
         type: "function",
@@ -851,25 +416,6 @@ const contracts = {
         name: "setURI",
         outputs: [],
         stateMutability: "nonpayable",
-        type: "function",
-      },
-      {
-        inputs: [
-          {
-            internalType: "bytes4",
-            name: "interfaceId",
-            type: "bytes4",
-          },
-        ],
-        name: "supportsInterface",
-        outputs: [
-          {
-            internalType: "bool",
-            name: "",
-            type: "bool",
-          },
-        ],
-        stateMutability: "view",
         type: "function",
       },
       {
@@ -895,7 +441,7 @@ const contracts = {
         inputs: [
           {
             internalType: "uint256",
-            name: "",
+            name: "tokenId",
             type: "uint256",
           },
         ],
@@ -913,7 +459,7 @@ const contracts = {
     ],
   },
   ShopContract: {
-    address: "0xC4485100CaF703c6D0eBaB3a4AF3f174938C4fEA",
+    address: "0x052Cd85606C214B18e1f90aE3963421515b761aC",
     abi: [
       {
         inputs: [
@@ -1249,6 +795,11 @@ const contracts = {
             internalType: "uint256",
             name: "_price",
             type: "uint256",
+          },
+          {
+            internalType: "string",
+            name: "_uri",
+            type: "string",
           },
         ],
         name: "publish",

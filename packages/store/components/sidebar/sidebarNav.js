@@ -6,10 +6,10 @@ const sidebarNav = [
   //   text: "Home",
   // },
   {
-    link: "/profile/user",
-    section: "profile",
-    icon: <i className="bx bx-user"></i>,
-    text: "Profile",
+    link: "/shop",
+    section: "shop",
+    icon: <i className="bx bx-cube"></i>,
+    text: "Shop",
   },
   {
     link: "/publish",
@@ -18,12 +18,11 @@ const sidebarNav = [
     text: "Publish",
   },
   {
-    link: "/shop",
-    section: "shop",
-    icon: <i className="bx bx-cube"></i>,
-    text: "Shop",
+    link: "/profile/user",
+    section: "profile",
+    icon: <i className="bx bx-user"></i>,
+    text: "Profile",
   },
-
   {
     link: "/settings",
     section: "settings",
