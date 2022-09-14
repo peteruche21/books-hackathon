@@ -13,12 +13,12 @@ export const _createBook = async (data: Idata) => {
   const metadata = await client.store({
     name: data.title,
     description: data.description,
-    image: new File([data.bookpdf], name, { type }),
+    image:  new File([data.bookcover], data.bookcover.name, {
+      type: data.bookcover.type
+    }),
     properties: {
       user: data.user,
-      file: new File([data.bookcover], data.bookcover.name, {
-        type: data.bookcover.type,
-      }),
+      file:  new File([data.bookpdf], name, { type }),
       genre: data.genre,
       price: data.price,
     },

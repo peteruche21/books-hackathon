@@ -93,17 +93,9 @@ export const createBook = createAsyncThunk<any, Idata>(
   "createBook",
   async (data, { rejectWithValue }) => {
     try {
-<<<<<<< HEAD
-      const res = await bookService.createBook(data);
-      if (res) {
-        console.log("here");
-        console.log(res.url);
-        return res;
-=======
       const metadata = await _createBook(data);
       if (metadata) {
         return metadata;
->>>>>>> dbab4b4c27cf0596f77d838c767928fd7827d29d
       }
     } catch (error) {
       errorHandler(error, rejectWithValue);

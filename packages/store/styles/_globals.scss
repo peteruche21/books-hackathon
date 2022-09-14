@@ -26,6 +26,10 @@ a {
   text-decoration: none;
   color: unset;
 }
+a:hover {
+  text-decoration: none;
+  color: unset;
+}
 
 img {
   width: 100%;
@@ -405,6 +409,10 @@ li {
   }
 }
 
+.textColor {
+  color: $mainColor;
+}
+
 .sidebar-open .main__content {
   height: 100vh;
   overflow: hidden;
@@ -418,4 +426,42 @@ li {
   background-color: "#ffffff";
   padding: "20px";
   border-radius: "10px";
+}
+
+.btnBg {
+  background-color: $mainColor;
+  color: #ffffff;
+}
+
+.card-bg {
+  background: var(--mainColor);
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.nft-img {
+  border-radius: 6px;
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: 0.5s ease;
+  backface-visibility: hidden;
+}
+
+.card {
+  background: var(--card-bg);
+  background-color: #ffffff;
+  max-width: 350px;
+  margin: 0 auto;
+  padding: 1.4em;
+  border-radius: 12px;
+  box-shadow: 0 25.6px 57.6px 0 rgba(134, 36, 219, 0.13),
+    0 4.8px 14.4px 0 rgba(134, 36, 219, 0.14);
+}
+
+.resize {
+  height: 400px;
+  margin-bottom: 30px;
 }

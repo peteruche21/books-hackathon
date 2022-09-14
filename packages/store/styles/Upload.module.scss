@@ -1,3 +1,6 @@
+@use "./abstracts/" as *;
+@use "sass:math";
+
 .disabled_btn {
   cursor: not-allowed;
   background-color: #cccccc;
@@ -14,13 +17,9 @@
 }
 
 .center_container {
-<<<<<<< HEAD
-  display: flex;
-  justify-content: center;
-  align-items: center;
-=======
   justify-content: center;
   align-items: center;
   display: flex;
->>>>>>> dbab4b4c27cf0596f77d838c767928fd7827d29d
 }
+
+
