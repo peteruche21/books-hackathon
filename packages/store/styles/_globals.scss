@@ -419,3 +419,12 @@ li {
   padding: "20px";
   border-radius: "10px";
 }
+
+.card {
+  max-width: 375px;
+  margin: 0 auto;
+  padding: 1.4em;
+  border-radius: 15px;
+  box-shadow: 0 25.6px 57.6px 0 rgba(202, 16, 219, 0.22),
+    0 4.8px 14.4px 0 rgba(177, 27, 119, 0.18);
+}

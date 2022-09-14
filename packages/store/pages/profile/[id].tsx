@@ -24,6 +24,7 @@ const Profile: NextPage<IUser> = ({ user }) => {
         <p className="text-center text-secondary">
           Your personal book collections
         </p>
+
         <div className="row p-6">
           <div className="card-deck p-6 ">
             <div className="card  rounded-lg">
