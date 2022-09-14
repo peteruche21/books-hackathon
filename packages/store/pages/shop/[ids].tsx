@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 import styles from "../../styles/Upload.module.scss";
 import Layout from "../../layout/MainLayout";
 import Image from "next/image";
+import noimage from "../../asset/no-image.png";
 import { getServerSideProps } from "../shop";
 import type { IUser } from "../../components/utils/types";
 import { AppDispatch, RootState } from "../../store/store";
@@ -20,11 +21,11 @@ const Buy: NextPage<IUser> = ({ user }) => {
         }}
         className="container-fluid"
       >
-        <h4 className="text-primary text-center m-4">Buy book</h4>
+        <h4 className="textColor text-center m-4">Buy book</h4>
         <div className={`${styles.center_container} row mb-6`}>
           <div className={`col-md-5`}>
-            <div className="card border border-secondary rounded-0">
-              {/* <Image src="..." className="card-img-top" alt="..." /> */}
+            <div className="card border  border-secondary">
+              <Image src={noimage} className="nft-img" alt="no image" />
               <div className="card-body">
                 <h5 className="card-title">Card title</h5>
                 <p className="card-text">
@@ -32,7 +33,7 @@ const Buy: NextPage<IUser> = ({ user }) => {
                   lead-in to additional content. This content is a little bit
                   longer.
                 </p>
-                <a href="#" className="btn btn-outline-secondary">
+                <a href="#" className="btn btnBg">
                   $20 Buy book
                 </a>
               </div>

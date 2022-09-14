@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import type { NextPage } from "next";
-import styles from "../../styles/Upload.module.scss";
+import styles from "../../styles/Layout.module.scss";
 import Layout from "../../layout/MainLayout";
+import noimage from "../../asset/no-image.png";
 import Image from "next/image";
 import { getSession } from "next-auth/react";
 import { GetServerSidePropsContext } from "next";
@@ -21,59 +22,108 @@ const Shop: NextPage<IUser> = ({ user }) => {
         }}
         className="container-fluid"
       >
-        <h4 className="text-primary text-center m-4">Book shop</h4>
+        <h4 className="textColor text-center m-4">Book shop</h4>
         <p className="text-center text-muted">
           Get your favorite books from bookstore blockchain
         </p>
         <div className={`${styles.create_container} row mb-6`}>
-          <div className={`col-md-12`}>
-            <div className="card-deck p-4">
-              <div className="card  rounded-lg">
-                {/* <Image src="..." className="card-img-top" alt="..." /> */}
+          <div className={`col-md-4`}>
+            <div className="card  resize">
+              <a href="#">
+                <Image src={noimage} className="nft-img" alt="no image" />
                 <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
+                  <h5 className="card-title ">Card title</h5>
                   <p className="card-text">
-                    This is a longer card with supporting text below as a
-                    natural lead-in to additional content. This content is a
-                    little bit longer.
+                    This is a longer card with supporting text below ..
                   </p>
-                  <a href="#" className="btn btn-outline-secondary">
-                    Buy book
-                  </a>
                 </div>
-              </div>
-              <div className="card  rounded-lg">
-                {/* <Image src="..." className="card-img-top" alt="..." /> */}
+              </a>
+            </div>
+          </div>
+          <div className={`col-md-4`}>
+            <div className="card resize ">
+              <a href="#">
+                <Image src={noimage} className="nft-img" alt="no image" />
                 <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">
-                    This card has supporting text below as a natural lead-in to
-                    additional content.
-                  </p>
-                  <a href="#" className="btn btn-outline-secondary">
-                    Buy book
-                  </a>
+                  <h5 className="card-title ">Card title</h5>
                 </div>
-              </div>
-              <div className="card rounded">
-                {/* <Image src="..." className="card-img-top" alt="..." /> */}
+              </a>
+            </div>
+          </div>
+          <div className={`col-md-4`}>
+            <div className="card resize ">
+              <a href="#">
+                <Image src={noimage} className="nft-img" alt="no image" />
                 <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
+                  <h5 className="card-title ">Card title</h5>
                   <p className="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This card has even longer
-                    content than the first to show that equal height action.
+                    This is a wider card with supporting text below...
                   </p>
-                  <a href="#" className="btn btn-outline-secondary">
-                    Buy book
-                  </a>
+
                   {/* <p className="card-text">
                     <small className="text-muted">
                       Last updated 3 mins ago
                     </small>
                   </p> */}
                 </div>
-              </div>
+              </a>
+            </div>
+          </div>
+          <div className={`col-md-4`}>
+            <div className="card resize ">
+              <a href="#">
+                <Image src={noimage} className="nft-img" alt="no image" />
+                <div className="card-body">
+                  <h5 className="card-title ">Card title</h5>
+                  <p className="card-text">
+                    This is a wider card with supporting text below...
+                  </p>
+
+                  {/* <p className="card-text">
+                    <small className="text-muted">
+                      Last updated 3 mins ago
+                    </small>
+                  </p> */}
+                </div>
+              </a>
+            </div>
+          </div>
+          <div className={`col-md-4`}>
+            <div className="card resize ">
+              <a href="#">
+                <Image src={noimage} className="nft-img" alt="no image" />
+                <div className="card-body">
+                  <h5 className="card-title ">Card title</h5>
+                  <p className="card-text">
+                    This is a wider card with supporting text below...
+                  </p>
+
+                  {/* <p className="card-text">
+                    <small className="text-muted">
+                      Last updated 3 mins ago
+                    </small>
+                  </p> */}
+                </div>
+              </a>
+            </div>
+          </div>
+          <div className={`col-md-4`}>
+            <div className="card resize">
+              <a href="#">
+                <Image src={noimage} className="nft-img" alt="no image" />
+                <div className="card-body">
+                  <h5 className="card-title ">Card title</h5>
+                  <p className="card-text">
+                    This is a wider card with supporting text below...
+                  </p>
+
+                  {/* <p className="card-text">
+                    <small className="text-muted">
+                      Last updated 3 mins ago
+                    </small>
+                  </p> */}
+                </div>
+              </a>
             </div>
           </div>
         </div>

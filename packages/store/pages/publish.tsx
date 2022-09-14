@@ -27,6 +27,7 @@ const Upload: NextPage<IUser> = ({ user }) => {
     bookpdf: "",
     bookcover: "",
     user: "",
+    amount: "",
     genre: "",
     price: "",
   });
@@ -75,6 +76,7 @@ const Upload: NextPage<IUser> = ({ user }) => {
             className={`col-md-6 ml-2`}
           >
             <div>
+              <h4 className="text-center mb-4">Publish book</h4>
               <form onSubmit={handleSubmit}>
                 <div className="form-group mt-3">
                   <FileUploader
@@ -103,27 +105,6 @@ const Upload: NextPage<IUser> = ({ user }) => {
                     types={bookTypes}
                   />
                 </div>
-                <div className="form-group ">
-                  <label htmlFor="title">Price</label>
-                  <input
-                    type="number"
-                    onChange={handleChange}
-                    name="price"
-                    required
-                    placeholder="$"
-                    className="form-control"
-                  />
-                </div>
-                <div className="form-group">
-                  <label>Description</label>
-                  <textarea
-                    className="form-control"
-                    onChange={handleChange}
-                    name="description"
-                    required
-                    rows={3}
-                  ></textarea>
-                </div>
                 <div className="form-group">
                   <label>Genre</label>
                   <select
@@ -139,8 +120,40 @@ const Upload: NextPage<IUser> = ({ user }) => {
                     <option value="others">Others</option>
                   </select>
                 </div>
+                <div className="form-group ">
+                  <label htmlFor="title">Price</label>
+                  <input
+                    type="number"
+                    onChange={handleChange}
+                    name="price"
+                    required
+                    placeholder="$"
+                    className="form-control"
+                  />
+                </div>
+                <div className="form-group ">
+                  <label htmlFor="title">Amount</label>
+                  <input
+                    type="number"
+                    onChange={handleChange}
+                    name="amount"
+                    required
+                    placeholder="0"
+                    className="form-control"
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Description</label>
+                  <textarea
+                    className="form-control"
+                    onChange={handleChange}
+                    name="description"
+                    required
+                    rows={3}
+                  ></textarea>
+                </div>
 
-                <button type="submit" className=" btn p-2 btn-primary mt-4">
+                <button type="submit" className="btnBg btn p-2  mt-4">
                   <i className="bi bi-plus-circle"></i> Submit book
                 </button>
               </form>
