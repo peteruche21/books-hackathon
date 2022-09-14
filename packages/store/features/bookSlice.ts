@@ -10,6 +10,7 @@ import type { Ibook } from "./bookThunk";
 
 const initialState: Ibook = {
   data: [],
+  url: "",
   purchases: [],
   error: "",
   message: "",
@@ -76,7 +77,8 @@ const bookSlice = createSlice({
     builder.addCase(createBook.fulfilled, (state, { payload }) => {
       state.Loading = "";
       if (payload) {
-        state.data = payload;
+        state.url = payload.url;
+        state.data = payload.data;
       }
     });
     builder.addCase(createBook.rejected, (state, action) => {

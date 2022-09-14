@@ -1,4 +1,5 @@
 const sidebarNav = [
+<<<<<<< HEAD
   {
     link: "/home",
     section: "home",
@@ -7,6 +8,16 @@ const sidebarNav = [
   },
   {
     link: "/profile",
+=======
+  // {
+  //   link: "/home",
+  //   section: "home",
+  //   icon: <i className="bx bx-home-alt"></i>,
+  //   text: "Home",
+  // },
+  {
+    link: "/profile/user",
+>>>>>>> dbab4b4c27cf0596f77d838c767928fd7827d29d
     section: "profile",
     icon: <i className="bx bx-user"></i>,
     text: "Profile",

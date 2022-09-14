@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 import styles from "../styles/Upload.module.scss";
 import Layout from "../layout/MainLayout";
 import { FileUploader } from "react-drag-drop-files";
-import { getServerSideProps } from "./home";
+import { getServerSideProps } from "./shop";
 import type { IUser } from "../components/utils/types";
 import { AppDispatch, RootState } from "../store/store";
 import { createBook } from "../features/bookThunk";
@@ -15,7 +15,7 @@ const bookTypes = ["PDF"];
 const Upload: NextPage<IUser> = ({ user }) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const { error, Loading, data, message } = useSelector(
+  const { error, Loading, data, url, message } = useSelector(
     (state: RootState) => state.bookReducer
   );
 
@@ -47,6 +47,7 @@ const Upload: NextPage<IUser> = ({ user }) => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
+<<<<<<< HEAD:packages/store/pages/publish.tsx
     // if (
     //   !formData.bookcover ||
     //   !formData.bookpdf! ||
@@ -65,6 +66,20 @@ const Upload: NextPage<IUser> = ({ user }) => {
     dispatch(createBook(newdata));
     console.log("=======");
     console.log(data, error, message);
+=======
+    if (bookFile == null || imgFile == null) {
+      return;
+    }
+
+    let data = { ...formData };
+    data.user = user.address;
+    data.bookpdf = bookFile as any;
+    data.bookcover = imgFile as any;
+    console.log(data);
+    console.log(url);
+
+    dispatch(createBook(data));
+>>>>>>> dbab4b4c27cf0596f77d838c767928fd7827d29d:packages/store/pages/upload.tsx
   };
 
   return (
@@ -94,6 +109,7 @@ const Upload: NextPage<IUser> = ({ user }) => {
                   <label htmlFor="title">Title of book</label>
                   <input
                     type="text"
+                    required
                     onChange={handleChange}
                     name="title"
                     className="form-control"
@@ -114,6 +130,7 @@ const Upload: NextPage<IUser> = ({ user }) => {
                     type="number"
                     onChange={handleChange}
                     name="price"
+                    required
                     placeholder="$"
                     className="form-control"
                   />
@@ -124,6 +141,7 @@ const Upload: NextPage<IUser> = ({ user }) => {
                     className="form-control"
                     onChange={handleChange}
                     name="description"
+                    required
                     rows={3}
                   ></textarea>
                 </div>
