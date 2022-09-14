@@ -3,7 +3,7 @@ import bookService from "../services/books.service";
 
 const errorHandler = (error: any, reject: any) => {
   // error res
-  console.log(error.response);
+  console.log(error);
   if (error.response && error.response.status === 500) {
     return reject("server error");
   }
@@ -88,6 +88,8 @@ export const createBook = createAsyncThunk<Idata[], Idata>(
     try {
       const res = await bookService.createBook(data);
       if (res) {
+        console.log("here");
+        console.log(res.url);
         return res;
       }
     } catch (error) {

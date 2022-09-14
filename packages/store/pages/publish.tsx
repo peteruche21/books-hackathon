@@ -47,30 +47,30 @@ const Upload: NextPage<IUser> = ({ user }) => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    if (
-      !formData.bookcover ||
-      !formData.bookpdf! ||
-      !formData.title ||
-      !formData.price
-    ) {
-      return;
-    }
+    // if (
+    //   !formData.bookcover ||
+    //   !formData.bookpdf! ||
+    //   !formData.title ||
+    //   !formData.price
+    // ) {
+    //   return;
+    // }
 
-    let data = { ...formData };
-    data.user = user.address;
-    data.bookpdf = bookFile as any;
-    data.bookcover = imgFile as any;
-    console.log(data);
+    let newdata = { ...formData };
+    newdata.user = user.address;
+    newdata.bookpdf = bookFile as any;
+    newdata.bookcover = imgFile as any;
+    console.log(newdata);
 
-    dispatch(createBook(data));
+    dispatch(createBook(newdata));
     console.log("=======");
-    console.log(data);
+    console.log(data, error, message);
   };
 
   return (
     <Layout user={user.address}>
       <div className="container m-2 mb-6 ">
-        <div className="row mb-6">
+        <div className={`${styles.center_container} row mb-6`}>
           <div
             style={{
               backgroundColor: "#ffff",
