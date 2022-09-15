@@ -6,18 +6,12 @@ import noimage from "../../asset/no-image.png";
 import Image from "next/image";
 import { getSession } from "next-auth/react";
 import { GetServerSidePropsContext } from "next";
-import type { IUser } from "../../components/utils/types";
-import { getBooks } from "../../features/bookThunk";
-import { AppDispatch, RootState } from "../../store/store";
-import { useDispatch, useSelector } from "react-redux";
-import Moralis from "moralis";
+import { getAllBooks } from "../api/books/request-books";
+import formatAddress from "../../components/utils/format-address";
 
-const Shop: NextPage<IUser> = ({ user }) => {
-  const dispatch = useDispatch<AppDispatch>();
-  const { error, Loading, data, url, message } = useSelector(
-    (state: RootState) => state.bookReducer
-  );
-
+const Shop: NextPage<any> = ({ user, books }) => {
+  const bookList = JSON.parse(books);
+  console.log(bookList);
   return (
     <Layout user={user.address}>
       <div
@@ -34,105 +28,38 @@ const Shop: NextPage<IUser> = ({ user }) => {
           Get your favorite books from bookstore blockchain
         </p>
         <div className={`${styles.create_container} row mb-6`}>
-          <div className={`col-md-4`}>
-            <div className="card  resize">
-              <a href="#">
-                <Image src={noimage} className="nft-img" alt="no image" />
-                <div className="card-body">
-                  <h5 className="card-title ">Card title</h5>
-                  <p className="card-text">
-                    This is a longer card with supporting text below ..
-                  </p>
+          {bookList.map((book: any, index: number) => {
+            return (
+              <div className={`col-md-4`} key={index}>
+                <div className="card resize">
+                  <a href={`/shop/${book.tokenId}`}>
+                    <img
+                      src={book.metadata.image.replace(
+                        "ipfs://",
+                        "https://ipfs.io/ipfs/"
+                      )}
+                      className="nft-img"
+                      alt={book.tokenId}
+                    />
+                    <div className="card-body">
+                      <h5 className="card-title ">{book.metadata.name}</h5>
+                      <p className="card-text">
+                        by: {formatAddress(book.metadata.properties.user)}
+                      </p>
+                      <p
+                        className="card-text"
+                        style={{
+                          textAlign: "right",
+                        }}
+                      >
+                        ${book.metadata.properties.price}
+                      </p>
+                    </div>
+                  </a>
                 </div>
-              </a>
-            </div>
-          </div>
-          <div className={`col-md-4`}>
-            <div className="card resize ">
-              <a href="#">
-                <Image src={noimage} className="nft-img" alt="no image" />
-                <div className="card-body">
-                  <h5 className="card-title ">Card title</h5>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className={`col-md-4`}>
-            <div className="card resize ">
-              <a href="#">
-                <Image src={noimage} className="nft-img" alt="no image" />
-                <div className="card-body">
-                  <h5 className="card-title ">Card title</h5>
-                  <p className="card-text">
-                    This is a wider card with supporting text below...
-                  </p>
-
-                  {/* <p className="card-text">
-                    <small className="text-muted">
-                      Last updated 3 mins ago
-                    </small>
-                  </p> */}
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className={`col-md-4`}>
-            <div className="card resize ">
-              <a href="#">
-                <Image src={noimage} className="nft-img" alt="no image" />
-                <div className="card-body">
-                  <h5 className="card-title ">Card title</h5>
-                  <p className="card-text">
-                    This is a wider card with supporting text below...
-                  </p>
-
-                  {/* <p className="card-text">
-                    <small className="text-muted">
-                      Last updated 3 mins ago
-                    </small>
-                  </p> */}
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className={`col-md-4`}>
-            <div className="card resize ">
-              <a href="#">
-                <Image src={noimage} className="nft-img" alt="no image" />
-                <div className="card-body">
-                  <h5 className="card-title ">Card title</h5>
-                  <p className="card-text">
-                    This is a wider card with supporting text below...
-                  </p>
-
-                  {/* <p className="card-text">
-                    <small className="text-muted">
-                      Last updated 3 mins ago
-                    </small>
-                  </p> */}
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className={`col-md-4`}>
-            <div className="card resize">
-              <a href="#">
-                <Image src={noimage} className="nft-img" alt="no image" />
-                <div className="card-body">
-                  <h5 className="card-title ">Card title</h5>
-                  <p className="card-text">
-                    This is a wider card with supporting text below...
-                  </p>
-
-                  {/* <p className="card-text">
-                    <small className="text-muted">
-                      Last updated 3 mins ago
-                    </small>
-                  </p> */}
-                </div>
-              </a>
-            </div>
-          </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </Layout>
@@ -152,8 +79,11 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
   }
 
+  const allBooks = await getAllBooks();
+  // console.log("all books in the contract", allBooks);
+
   return {
-    props: { user: session.user },
+    props: { user: session.user, books: JSON.stringify(allBooks) },
   };
 }
 

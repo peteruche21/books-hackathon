@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import type { NextPage } from "next";
 import styles from "../../styles/Layout.module.scss";
 import Layout from "../../layout/MainLayout";
-import Image from "next/image";
-import noimage from "../../asset/no-image.png";
-import { getServerSideProps } from "../shop";
-import type { IUser } from "../../components/utils/types";
-import { AppDispatch, RootState } from "../../store/store";
-import { useDispatch, useSelector } from "react-redux";
+import { getSession } from "next-auth/react";
+import { GetServerSidePropsContext } from "next";
+import { getWalletBooks } from "../api/books/request-walletBooks";
+import formatAddress from "../../components/utils/format-address";
 
-const Profile: NextPage<IUser> = ({ user }) => {
+const Profile: NextPage<any> = ({ user, walletBooks }) => {
+  const walletBookList = JSON.parse(walletBooks);
   return (
     <Layout user={user.address}>
       <div
@@ -27,54 +26,51 @@ const Profile: NextPage<IUser> = ({ user }) => {
         </p>
 
         <div className="row p-6">
-          <div className="col-md-4 ">
-            <div className="card ">
-              <a href="#">
-                <Image src={noimage} className="nft-img" alt="no image" />
-                <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">
-                    This is a longer card with supporting text below as a
-                    natural lead-in to additional content...
-                  </p>
+          {walletBookList.map((book: any, index: number) => {
+            return (
+              <div className="col-md-4 p-6 " key={index}>
+                <div className="card ">
+                  <a href={`/shop/${book.tokenId}`}>
+                    <img
+                      src={book.metadata.image}
+                      className="nft-img"
+                      alt={book.tokenId}
+                    />
+                    <div className="card-body">
+                      <h5 className="card-title ">{book.metadata.name}</h5>
+                      <p className="card-text">
+                        by: {formatAddress(book.metadata.properties.user)}
+                      </p>
+                    </div>
+                  </a>
                 </div>
-              </a>
-            </div>
-          </div>
-          <div className="col-md-4  ">
-            <div className="card  ">
-              <a href="#">
-                <Image src={noimage} className="nft-img" alt="no image" />
-                <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">
-                    This card has supporting text below as a natural lead-in to
-                    additional content...
-                  </p>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className="col-md-4 p-6 ">
-            <div className="card ">
-              <Image src={noimage} className="nft-img" alt="no image" />
-              <a href="#">
-                <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content...
-                  </p>
-                </div>
-              </a>
-            </div>
-          </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </Layout>
   );
 };
 
-export { getServerSideProps };
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session = await getSession(context);
+
+  // redirect if not authenticated
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  const walletBooks = await getWalletBooks(session.user?.address);
+
+  return {
+    props: { user: session.user, walletBooks: JSON.stringify(walletBooks) },
+  };
+}
 
 export default Profile;

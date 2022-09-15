@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { Token } from "nft.storage/dist/src/token";
 import {
   _createBook,
   _getBooks,
@@ -88,12 +89,11 @@ export const boughtBooks = createAsyncThunk<any, any>(
   }
 );
 
-export const createBook = createAsyncThunk<any, Idata>(
+export const createBook = createAsyncThunk<any, Token<any>>(
   "createBook",
   async (data, { rejectWithValue }) => {
     try {
-      const metadata = await _createBook(data);
-      return metadata;
+      return data;
     } catch (error) {
       errorHandler(error, rejectWithValue);
     }

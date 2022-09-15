@@ -10,14 +10,14 @@ import LoadingSpinner from "../components/loading/loading";
 import { createBook } from "../features/bookThunk";
 import { _createBook } from "../services/nftstorage";
 import { useDispatch, useSelector } from "react-redux";
-import usePublish from "../hooks/usePublish";
+import useEthers from "../hooks/useEthers";
 
 const fileTypes = ["JPG", "PNG", "GIF"];
 const bookTypes = ["PDF"];
 
 const Upload: NextPage<IUser> = ({ user }) => {
   const dispatch = useDispatch<AppDispatch>();
-  const publish = usePublish();
+  const { publish } = useEthers(user.address);
 
   const { error, Loading, data, url, message } = useSelector(
     (state: RootState) => state.bookReducer
@@ -50,7 +50,7 @@ const Upload: NextPage<IUser> = ({ user }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     if (bookFile == null || imgFile == null) {
       return;
@@ -63,7 +63,21 @@ const Upload: NextPage<IUser> = ({ user }) => {
     console.log(bookdata);
 
     console.log("======");
-    dispatch(createBook(bookdata));
+
+    // get book metadata
+    const metadata = await _createBook(bookdata);
+    // publish to blockchain
+    console.log(metadata);
+    const { isSuccess } = await publish(
+      parseInt(bookdata.amount),
+      bookdata.price,
+      metadata.url
+    );
+    if (isSuccess) {
+      console.log(data);
+      // dispatch to state
+      dispatch(createBook(metadata));
+    }
   };
 
   return (

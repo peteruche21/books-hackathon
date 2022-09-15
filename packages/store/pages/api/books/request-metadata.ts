@@ -3,26 +3,24 @@ import Moralis from "moralis";
 import contracts from "../../../constants/contracts";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { address } = req.body;
-
+  const { tokenId, chain } = req.body;
   try {
-    const response = await getWalletBooks(address);
+    const response = await getMetadata(tokenId, chain);
     res.status(200).json(response);
   } catch (error) {
     res.status(400).json({ error });
   }
 };
 
-export const getWalletBooks = async (address: string) => {
+export async function getMetadata(tokenId: string, chainId: number) {
   await Moralis.start({ apiKey: process.env.MORALIS_API_KEY });
-  const response = await Moralis.EvmApi.nft.getWalletNFTs({
-    address,
+  const response = await Moralis.EvmApi.nft.getNFTMetadata({
+    address: contracts.BookContract.address,
     chain: 5,
-    tokenAddresses: [contracts.BookContract.address],
+    tokenId,
   });
-  console.log("wallet book nfts", response);
-  if (response) return response?.toJSON();
+  if (response) return response;
   return null;
-};
+}
 
 export default handler;
