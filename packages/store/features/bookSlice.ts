@@ -29,7 +29,7 @@ const bookSlice = createSlice({
     builder.addCase(getBooks.fulfilled, (state, { payload }) => {
       state.Loading = "";
       if (payload) {
-        state.data = payload;
+        state.data.push(payload.value);
       }
     });
     builder.addCase(getBooks.rejected, (state, action) => {

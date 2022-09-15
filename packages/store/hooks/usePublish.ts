@@ -4,7 +4,7 @@ import { BigNumber, ethers } from "ethers";
 import { useState } from "react";
 
 const usePublish = () => {
-  const [args, setArgs] = useState<[number, BigNumber]>();
+  const [args, setArgs] = useState<[number, BigNumber, string]>();
   const { config } = usePrepareContractWrite({
     addressOrName: contracts.ShopContract.address,
     contractInterface: contracts.ShopContract.abi,
@@ -15,8 +15,8 @@ const usePublish = () => {
     },
   });
   const { data, isLoading, isSuccess, write } = useContractWrite(config);
-  const publish = (amount: number, price: string) => {
-    setArgs([amount, ethers.utils.parseUnits(price, 6)]);
+  const publish = (amount: number, price: string, uri: string) => {
+    setArgs([amount, ethers.utils.parseUnits(price, 6), uri]);
     write?.();
     return { data, isLoading, isSuccess };
   };

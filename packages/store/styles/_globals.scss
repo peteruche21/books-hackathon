@@ -442,6 +442,7 @@ li {
 .btnBg {
   background-color: $mainColor;
   color: #ffffff;
+  width: 200px;
 }
 
 .nft-img {
@@ -467,4 +468,8 @@ li {
 .resize {
   height: 400px;
   margin-bottom: 30px;
+}
+
+.card:hover {
+  margin-bottom: 50px;
 }
