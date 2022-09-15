@@ -1,420 +1,475 @@
-@use './abstracts/' as *;
-@use 'sass:math';
+@use "./abstracts/" as *;
+@use "sass:math";
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
 
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 html {
-    overflow-x: hidden;
+  overflow-x: hidden;
 }
 
 body {
-    font-family: $fontFamily;
-    color: $txtColor;
-    font-size: $fontSizeNormal;
-    line-height: 1.5;
-    background-color: $bodyBg;
-    overflow-x: hidden;
+  font-family: $fontFamily;
+  color: $txtColor;
+  font-size: $fontSizeNormal;
+  line-height: 1.5;
+  background-color: $bodyBg;
+  overflow-x: hidden;
 }
 
 a {
-    text-decoration: none;
-    color: unset;
+  text-decoration: none;
+  color: unset;
+}
+a:hover {
+  text-decoration: none;
+  color: unset;
 }
 
 img {
-    width: 100%;
+  width: 100%;
 }
 
 ul,
 li {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 .mb {
-    margin-bottom: $spacing;
+  margin-bottom: $spacing;
 
-    @include tablet {
-        margin-bottom: $mobileSpacing;
-    }
+  @include tablet {
+    margin-bottom: $mobileSpacing;
+  }
 }
 
 .title {
-    font-size: $fontSizeMedium;
-    font-weight: 700;
+  font-size: $fontSizeMedium;
+  font-weight: 700;
 }
 
 .txt-success {
-    color: $green;
+  color: $green;
 }
 
-.txt-danger { 
-    color: $red;
+.txt-danger {
+  color: $red;
 }
 
 .box {
-    padding: 20px 30px;
-    border-radius: $borderRadius;
-    background-color: $mainBg;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  padding: 20px 30px;
+  border-radius: $borderRadius;
+  background-color: $mainBg;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
-    &-purple {
-        background-color: $purple;
-        color: $white;
+  &-purple {
+    background-color: $purple;
+    color: $white;
+  }
+
+  &-fullheight {
+    height: calc(100% - $spacing);
+
+    @include tablet {
+      height: calc(100% - $mobileSpacing);
     }
-
-    &-fullheight {
-        height: calc(100% - $spacing);
-
-        @include tablet {
-            height: calc(100% - $mobileSpacing);
-        }
-    }
+  }
 }
 
 .dashboard-wrapper {
-    @include flex(stretch);
-    @include tablet {
-        flex-direction: column;
-    }
-
-    &__main {
-        flex-grow: 1;
-        padding-right: $sideBarWidth;
-
-        @include tablet {
-            padding-right: 0;
-        }
-    }
-
-    &__right {
-        width: $sideBarWidth;
-        background-color: $mainBg;
-        height: 100vh;
-        padding: $spacing;
-        border-top-left-radius: $borderRadius;
-        border-bottom-left-radius: $borderRadius;
-        position: fixed;
-        top: 0;
-        right: 0;
-
-        @include tablet {
-            position: relative;
-            padding: $mobileSpacing;
-            margin-top: $mobileSpacing;
-            border-radius: $borderRadius;
-            width: 100%;
-            height: max-content;
-        }
-    }
-}
-
-.sidebar {
-    @include flex(stretch, flex-start);
+  @include flex(stretch);
+  @include tablet {
     flex-direction: column;
-    color: $txtColor;
+  }
+
+  &__main {
+    flex-grow: 1;
+    padding-right: $sideBarWidth;
+
+    @include tablet {
+      padding-right: 0;
+    }
+  }
+
+  &__right {
     width: $sideBarWidth;
     background-color: $mainBg;
     height: 100vh;
+    padding: $spacing;
+    border-top-left-radius: $borderRadius;
+    border-bottom-left-radius: $borderRadius;
     position: fixed;
     top: 0;
-    z-index: 100;
+    right: 0;
 
     @include tablet {
-        width: 100vw;
-        background-color: $mainColor;
-        color: $white;
-        z-index: 1;
+      position: relative;
+      padding: $mobileSpacing;
+      margin-top: $mobileSpacing;
+      border-radius: $borderRadius;
+      width: 100%;
+      height: max-content;
+    }
+  }
+}
+
+.sidebar {
+  @include flex(stretch, flex-start);
+  flex-direction: column;
+  color: $txtColor;
+  width: $sideBarWidth;
+  background-color: $mainBg;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+
+  @include tablet {
+    width: 100vw;
+    background-color: $mainColor;
+    color: $white;
+    z-index: 1;
+  }
+
+  &__logo {
+    @include flex();
+    height: $sideBarLogoHeight;
+
+    @include tablet {
+      justify-content: space-between;
+      height: math.div($sideBarLogoHeight, 1.8);
+      padding: 0 $mobileSpacing;
+      margin-bottom: $mobileSpacing;
     }
 
-    &__logo {
-        @include flex();
-        height: $sideBarLogoHeight;
+    img {
+      --size: 55px;
+      width: var(--size);
+      height: var(--size);
+    }
+
+    .sidebar-close {
+      cursor: pointer;
+      display: none;
+
+      i {
+        font-size: 2rem;
+      }
+
+      @include tablet {
+        display: block;
+      }
+    }
+  }
+
+  &__menu {
+    @include flex(stretch, flex-start);
+    flex-direction: column;
+    flex-grow: 1;
+
+    &__item {
+      @include flex(center, flex-start);
+      position: relative;
+      margin-bottom: 2rem;
+      padding-left: 20%;
+      transition: color 0.3s ease-in-out;
+
+      @include tablet {
+        padding-left: $mobileSpacing;
+      }
+
+      &:hover {
+        color: $mainColor;
 
         @include tablet {
-            justify-content: space-between;
-            height: math.div($sideBarLogoHeight, 1.8);
-            padding: 0 $mobileSpacing;
-            margin-bottom: $mobileSpacing;
+          color: $orange;
+        }
+      }
+
+      &.active {
+        font-weight: 700;
+        color: $mainColor;
+
+        @include tablet {
+          color: $orange;
         }
 
-        img {
-            --size: 55px;
-            width: var(--size);
-            height: var(--size);
+        &::before {
+          content: "";
+          position: absolute;
+          height: 100%;
+          width: 5px;
+          left: 0;
+          top: 0;
+          background-color: $mainColor;
+          border-top-right-radius: 20px;
+          border-bottom-right-radius: 20px;
+
+          @include tablet {
+            background-color: $orange;
+          }
+        }
+      }
+
+      &__icon {
+        --size: 40px;
+        width: var(--size);
+        height: var(--size);
+        margin-right: 3rem;
+        @include flex(center, center);
+
+        @include tablet {
+          margin-right: 1rem;
         }
 
-        .sidebar-close {
-            cursor: pointer;
-            display: none;
-
-            i {
-                font-size: 2rem;
-            }
-
-            @include tablet {
-                display: block;
-            }
+        i {
+          font-size: 1.9rem;
         }
+      }
+
+      &:last-child {
+        margin-top: auto;
+        cursor: pointer;
+      }
     }
-
-    &__menu {
-        @include flex(stretch, flex-start);
-        flex-direction: column;
-        flex-grow: 1;
-
-        &__item {
-            @include flex(center, flex-start);
-            position: relative;
-            margin-bottom: 2rem;
-            padding-left: 20%;
-            transition: color 0.3s ease-in-out;
-
-            @include tablet {
-                padding-left: $mobileSpacing;
-            }
-
-            &:hover {
-                color: $mainColor;
-
-                @include tablet {
-                    color: $orange;
-                }
-            }
-
-            &.active {
-                font-weight: 700;
-                color: $mainColor;
-
-                @include tablet {
-                    color: $orange;
-                }
-
-                &::before {
-                    content: '';
-                    position: absolute;
-                    height: 100%;
-                    width: 5px;
-                    left: 0;
-                    top: 0;
-                    background-color: $mainColor;
-                    border-top-right-radius: 20px;
-                    border-bottom-right-radius: 20px;
-
-                    @include tablet {
-                        background-color: $orange;
-                    }
-                }
-            }
-
-            &__icon {
-                --size: 40px;
-                width: var(--size);
-                height: var(--size);
-                margin-right: 3rem;
-                @include flex(center, center);
-
-                @include tablet {
-                    margin-right: 1rem;
-                }
-
-                i {
-                    font-size: 1.9rem;
-                }
-            }
-
-            &:last-child {
-                margin-top: auto;
-                cursor: pointer;
-            }
-        }
-    }
+  }
 }
 
 .icon_size {
-        --size: 40px;
-        margin: 4px;
-        width: var(--size);
-        height: var(--size);
-        i {
-            font-size: 1.9rem;
-        }
-    
-} 
-
-.summary-box {
-    @include flex(stretch, flex-start);
-
-    &__chart {
-        width: 40%;
-
-        &__value {
-            margin-top: -30%;
-            font-weight: 700;
-        }
-    }
-
-    &__info {
-        width: 60%;
-        @include flex(flex-start, space-between);
-        flex-direction: column;
-
-        &__title {
-            font-size: $fontSizeMedium;
-            font-weight: 700;
-            line-height: 1.2;
-
-            span {
-                font-size: 13px;
-                font-weight: 400;
-            }
-        }
-
-        &__value {
-            font-weight: 700;
-            font-size: $fontSizeLarge;
-            color: $black;
-        }
-    }
+  --size: 40px;
+  margin: 4px;
+  width: var(--size);
+  height: var(--size);
+  i {
+    font-size: 1.9rem;
+  }
 }
 
-.summary-box-special {
-    @include flex(center, space-between);
+.summary-box {
+  @include flex(stretch, flex-start);
+
+  &__chart {
+    width: 40%;
+
+    &__value {
+      margin-top: -30%;
+      font-weight: 700;
+    }
+  }
+
+  &__info {
+    width: 60%;
+    @include flex(flex-start, space-between);
     flex-direction: column;
-    height: 100%;
 
     &__title {
-        font-weight: 700;
-        font-size: $fontSizeMedium;
+      font-size: $fontSizeMedium;
+      font-weight: 700;
+      line-height: 1.2;
+
+      span {
+        font-size: 13px;
+        font-weight: 400;
+      }
     }
 
     &__value {
-        font-size: $fontSizeLarge;
-        font-weight: 700;
+      font-weight: 700;
+      font-size: $fontSizeLarge;
+      color: $black;
     }
+  }
+}
+
+.summary-box-special {
+  @include flex(center, space-between);
+  flex-direction: column;
+  height: 100%;
+
+  &__title {
+    font-weight: 700;
+    font-size: $fontSizeMedium;
+  }
+
+  &__value {
+    font-size: $fontSizeLarge;
+    font-weight: 700;
+  }
 }
 
 .main {
-    padding-left: $sideBarWidth;
-    overflow-x: hidden;
+  padding-left: $sideBarWidth;
+  overflow-x: hidden;
+
+  @include tablet {
+    padding-left: 0;
+    width: 100vw;
+  }
+
+  &__content {
+    min-height: 100vh;
+    padding: $spacing;
+    transition: all 0.5s ease-in-out;
 
     @include tablet {
-        padding-left: 0;
-        width: 100vw;
+      padding: $mobileSpacing;
+      position: relative;
+      background-color: $bodyBg;
+      z-index: 100;
     }
-
-    &__content {
-        min-height: 100vh;
-        padding: $spacing;
-        transition: all 0.5s ease-in-out;
-
-        @include tablet {
-            padding: $mobileSpacing;
-            position: relative;
-            background-color: $bodyBg;
-            z-index: 100;
-        }
-    }
+  }
 }
 
 .sidebar-open .main__content {
-    height: 100vh;
-    overflow: hidden;
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
-    transform: scale(0.8) translateX(50%);
-    transition: all 0.5s ease-in-out;
+  height: 100vh;
+  overflow: hidden;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  transform: scale(0.8) translateX(50%);
+  transition: all 0.5s ease-in-out;
 }
 
-
-
 .revenue-list {
-    & > * ~ * {
-        margin-top: math.div($spacing, 2);
-    }
+  & > * ~ * {
+    margin-top: math.div($spacing, 2);
+  }
 
-    &__item {
-        &__title {
-            @include flex(center, space-between);
-            font-size: $fontSizeMedium;
-            margin-bottom: math.div($spacing, 6);
+  &__item {
+    &__title {
+      @include flex(center, space-between);
+      font-size: $fontSizeMedium;
+      margin-bottom: math.div($spacing, 6);
 
-            span {
-                font-weight: 700;
-            }
-        }
+      span {
+        font-weight: 700;
+      }
     }
+  }
 }
 
 .topnav {
-    @include flex(center, space-between);
-    margin-bottom: $spacing;
+  @include flex(center, space-between);
+  margin-bottom: $spacing;
 
-    @include tablet {
-        margin-bottom: $mobileSpacing;
-    }
+  @include tablet {
+    margin-bottom: $mobileSpacing;
+  }
 }
 
 .sidebar-toggle {
-    --size: 40px;
-    width: var(--size);
-    height: var(--size);
-    @include flex(center, center);
-    cursor: pointer;
-    display: none;
+  --size: 40px;
+  width: var(--size);
+  height: var(--size);
+  @include flex(center, center);
+  cursor: pointer;
+  display: none;
 
-    @include tablet {
-        display: flex;
-    }
-    
-    i {
-        font-size: 3rem;
-        color: $mainColor;
-    }
+  @include tablet {
+    display: flex;
+  }
+
+  i {
+    font-size: 3rem;
+    color: $mainColor;
+  }
 }
 
 .user-info {
-    @include flex(center, flex-start);
-    background-color: $mainBg;
+  @include flex(center, flex-start);
+  background-color: $mainBg;
+  border-radius: $borderRadius;
+  height: 50px;
+  width: max-content;
+
+  &__img {
+    --size: 150px;
+    padding-left: 10px;
+    width: var(--size);
+    height: var(--size);
     border-radius: $borderRadius;
-    height: 50px;
-    width: max-content;
 
-    &__img {
-        --size: 150px;
-        padding-left: 10px;
-        width: var(--size);
-        height: var(--size);
-        border-radius: $borderRadius;
-
-        img {
-            border-radius: $borderRadius;
-        }
+    img {
+      border-radius: $borderRadius;
     }
+  }
 
-    &__name {
-        padding: 0 20px;
-        font-size: $fontSizeMedium;
-        font-weight: 700;
+  &__name {
+    padding: 0 20px;
+    font-size: $fontSizeMedium;
+    font-weight: 700;
+    margin: auto;
 
-        @include tablet {
-            padding: 0 $mobileSpacing;
-        }
+    @include tablet {
+      padding: 0 $mobileSpacing;
     }
+  }
+
+  &__seed {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    background-color: gray;
+    border-radius: 50%;
+    margin-left: 10px;
+  }
+}
+
+.textColor {
+  color: $mainColor;
 }
 
 .sidebar-open .main__content {
-    height: 100vh;
-    overflow: hidden;
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
-    transform: scale(0.8) translateX(50%);
-    transition: all 0.5s ease-in-out;
+  height: 100vh;
+  overflow: hidden;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  transform: scale(0.8) translateX(50%);
+  transition: all 0.5s ease-in-out;
 }
 
+.create_container {
+  background-color: "#ffffff";
+  padding: "20px";
+  border-radius: "10px";
+}
+
+.btnBg {
+  background-color: $mainColor;
+  color: #ffffff;
+  width: 200px;
+}
+
+.nft-img {
+  border-radius: 6px;
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: 0.5s ease;
+  backface-visibility: hidden;
+}
+
+.card {
+  background-color: #ffffff;
+  max-width: 350px;
+  margin: 0 auto;
+  padding: 1.4em;
+  border-radius: 12px;
+  box-shadow: 0 25.6px 57.6px 0 rgba(134, 36, 219, 0.13),
+    0 4.8px 14.4px 0 rgba(134, 36, 219, 0.14);
+}
+
+.resize {
+  height: 400px;
+  margin-bottom: 30px;
+}
+
+.card:hover {
+  margin-bottom: 50px;
+}

@@ -9,16 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.8.5",
     "axios": "^0.27.2",
     "chart.js": "^3.9.1",
     "ethers": "^5.7.0",
     "moralis": "^2.3.1",
     "next": "12.2.5",
     "next-auth": "^4.10.3",
+    "nft.storage": "^7.0.0",
     "react": "18.2.0",
+    "react-blockies": "^1.4.1",
     "react-chartjs-2": "^4.3.1",
     "react-circular-progressbar": "^2.1.0",
     "react-dom": "18.2.0",
+    "react-drag-drop-files": "^2.3.7",
+    "react-redux": "^8.0.2",
     "sass": "^1.54.8",
     "wagmi": "^0.6.5"
   },
