@@ -6,14 +6,18 @@ import { FileUploader } from "react-drag-drop-files";
 import { getServerSideProps } from "./shop";
 import type { IUser } from "../components/utils/types";
 import { AppDispatch, RootState } from "../store/store";
+import LoadingSpinner from "../components/loading/loading";
 import { createBook } from "../features/bookThunk";
+import { _createBook } from "../services/nftstorage";
 import { useDispatch, useSelector } from "react-redux";
+import usePublish from "../hooks/usePublish";
 
 const fileTypes = ["JPG", "PNG", "GIF"];
 const bookTypes = ["PDF"];
 
 const Upload: NextPage<IUser> = ({ user }) => {
   const dispatch = useDispatch<AppDispatch>();
+  const publish = usePublish();
 
   const { error, Loading, data, url, message } = useSelector(
     (state: RootState) => state.bookReducer
@@ -52,14 +56,14 @@ const Upload: NextPage<IUser> = ({ user }) => {
       return;
     }
 
-    let data = { ...formData };
-    data.user = user.address;
-    data.bookpdf = bookFile as any;
-    data.bookcover = imgFile as any;
-    console.log(data);
-    console.log(url);
+    let bookdata = { ...formData };
+    bookdata.user = user.address;
+    bookdata.bookpdf = bookFile as any;
+    bookdata.bookcover = imgFile as any;
+    console.log(bookdata);
 
-    dispatch(createBook(data));
+    console.log("======");
+    dispatch(createBook(bookdata));
   };
 
   return (
@@ -154,7 +158,8 @@ const Upload: NextPage<IUser> = ({ user }) => {
                 </div>
 
                 <button type="submit" className="btnBg btn p-2  mt-4">
-                  <i className="bi bi-plus-circle"></i> Submit book
+                  <i className="bi bi-plus-circle"></i>
+                  {Loading ? <LoadingSpinner /> : "Submit book"}
                 </button>
               </form>
             </div>

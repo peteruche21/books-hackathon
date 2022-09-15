@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import type { NextPage } from "next";
 import styles from "../../styles/Layout.module.scss";
 import Layout from "../../layout/MainLayout";
@@ -7,10 +7,17 @@ import Image from "next/image";
 import { getSession } from "next-auth/react";
 import { GetServerSidePropsContext } from "next";
 import type { IUser } from "../../components/utils/types";
+import { getBooks } from "../../features/bookThunk";
 import { AppDispatch, RootState } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
+import Moralis from "moralis";
 
 const Shop: NextPage<IUser> = ({ user }) => {
+  const dispatch = useDispatch<AppDispatch>();
+  const { error, Loading, data, url, message } = useSelector(
+    (state: RootState) => state.bookReducer
+  );
+
   return (
     <Layout user={user.address}>
       <div

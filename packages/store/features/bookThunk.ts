@@ -47,14 +47,13 @@ export interface Ibook {
   Loading2: string;
 }
 
-export const getBooks = createAsyncThunk<any, any>(
+export const getBooks = createAsyncThunk<any, void>(
   "getBooks",
   async (data, { rejectWithValue }) => {
     try {
-      const res = (await _createBook(data)) as any;
-      if (res) {
-        return res;
-      }
+      const res = await _getBooks();
+      console.log(res);
+      return res;
     } catch (error) {
       errorHandler(error, rejectWithValue);
     }
@@ -94,9 +93,7 @@ export const createBook = createAsyncThunk<any, Idata>(
   async (data, { rejectWithValue }) => {
     try {
       const metadata = await _createBook(data);
-      if (metadata) {
-        return metadata;
-      }
+      return metadata;
     } catch (error) {
       errorHandler(error, rejectWithValue);
     }
