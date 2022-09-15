@@ -84,7 +84,6 @@ const Upload: NextPage<IUser> = ({ user }) => {
               <form onSubmit={handleSubmit}>
                 <div className="form-group mt-3">
                   <FileUploader
-                    maxSize={1000000000}
                     label="upload or drop a book cover image"
                     handleChange={handleImage}
                     name="bookcover"
@@ -104,7 +103,6 @@ const Upload: NextPage<IUser> = ({ user }) => {
                 <label>Book pdf</label>
                 <div className="form-group mt-1">
                   <FileUploader
-                    maxSize={1000000000}
                     label="upload or drop a pdf file"
                     handleChange={handleBook}
                     name="bookpdf"
