@@ -1,6 +1,18 @@
 import CredentialsProvider from "next-auth/providers/credentials";
-import NextAuth from "next-auth";
+import NextAuth, { ISODateString } from "next-auth";
 import Moralis from "moralis";
+
+export type TUserData = {
+  address: string;
+  signature: string;
+  profileId: string;
+  expirationTime: ISODateString;
+  chainId: number;
+};
+
+export interface ISession {
+  user: TUserData;
+}
 
 export default NextAuth({
   providers: [
@@ -26,11 +38,17 @@ export default NextAuth({
 
           await Moralis.start({ apiKey: process.env.MORALIS_API_KEY });
 
-          const { address, profileId } = (
+          const { address, profileId, expirationTime, chainId } = (
             await Moralis.Auth.verify({ message, signature, network: "evm" })
           ).raw;
 
-          const user = { address, profileId, signature };
+          const user = {
+            address,
+            profileId,
+            expirationTime,
+            signature,
+            chainId,
+          };
           // returning the user object and creating  a session
           return user;
         } catch (e) {
@@ -47,8 +65,10 @@ export default NextAuth({
       return token;
     },
     async session({ session, token }: any) {
-      session.user = token.user;
-      session.accessToken = token.accessToken;
+      session.expires = (token as unknown as ISession).user.expirationTime;
+      (session as unknown as ISession).user = (
+        token as unknown as ISession
+      ).user;
       return session;
     },
   },

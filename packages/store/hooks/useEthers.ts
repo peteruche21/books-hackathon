@@ -1,3 +1,4 @@
+import { Ethereum } from "@wagmi/core";
 import { BigNumber, Contract, ethers } from "ethers";
 import React, { useState, useEffect } from "react";
 import contracts from "../constants/contracts";
@@ -9,7 +10,7 @@ const useEthers = (userAddress: string) => {
 
   useEffect(() => {
     const conbaseWalletProvider = window.ethereum.providers.find(
-      (wallet) => wallet.isCoinbaseWallet
+      (wallet: Ethereum) => wallet.isCoinbaseWallet
     );
     const _provider = new ethers.providers.Web3Provider(conbaseWalletProvider);
     const _signer = _provider.getSigner();

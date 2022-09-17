@@ -15,8 +15,17 @@ const customStyle = {
   gap: "5%",
 };
 
+interface ITokenMetadata {
+  name: string;
+  image: string;
+  description: string;
+  properties: {
+    [key: string]: string;
+  };
+}
+
 const Buy: NextPage<any> = ({ user, tokenData, tokenId }) => {
-  const [tokenMetadata, setTokenMetadata] = useState();
+  const [tokenMetadata, setTokenMetadata] = useState<ITokenMetadata>();
   const { purchase } = useEthers(user.address);
   async function handlePurchase(e: React.MouseEvent) {
     e.preventDefault();
