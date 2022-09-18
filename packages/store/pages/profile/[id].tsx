@@ -32,7 +32,10 @@ const Profile: NextPage<any> = ({ user, walletBooks }) => {
                 <div className="card ">
                   <a href={`/shop/${book.tokenId}`}>
                     <img
-                      src={book.metadata.image}
+                      src={book.metadata.image.replace(
+                        "ipfs://",
+                        "https://ipfs.io/ipfs/"
+                      )}
                       className="nft-img"
                       alt={book.tokenId}
                     />

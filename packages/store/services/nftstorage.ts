@@ -6,7 +6,7 @@ import baseApi from "./baseApi";
 import axios from "axios";
 
 const client = new NFTStorage({
-  token: process.env.NEXT_APIKEY,
+  token: process.env.NFT_APIKEY,
 });
 
 export const _createBook = async (data: Idata) => {

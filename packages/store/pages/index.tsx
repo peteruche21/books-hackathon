@@ -4,7 +4,13 @@ import { getSession } from "next-auth/react";
 import baseApi from "../services/baseApi";
 import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
 import { signIn } from "next-auth/react";
-import { useAccount, useConnect, useSignMessage, useDisconnect } from "wagmi";
+import {
+  useAccount,
+  useConnect,
+  useSignMessage,
+  useDisconnect,
+  chain as appChain,
+} from "wagmi";
 import type { NextPage } from "next";
 import styles from "../styles/Landing.module.scss";
 
@@ -27,8 +33,9 @@ const Landing: NextPage<P> = (props) => {
 
     const { account, chain } = await connectAsync({
       connector: new CoinbaseWalletConnector({
+        chains: [appChain.goerli],
         options: {
-          appName: "ThirdBook",
+          appName: "ThirdBook.app",
         },
       }),
     });

@@ -3,10 +3,10 @@ declare let process: {
     APP_DOMAIN: string;
     NEXTAUTH_URL: string;
     MORALIS_API_KEY: string;
-    BASE_API: string;
-    PERSONA: string;
+    NEXT_PUBLIC_BASE_API: string;
+    NEXTAUTH_SECRET: string;
     TOKEN: string;
-    NEXT_APIKEY: string;
+    NFT_APIKEY: string;
   };
 };
 
