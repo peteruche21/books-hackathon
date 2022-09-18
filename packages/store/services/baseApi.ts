@@ -5,8 +5,10 @@ import axios, { AxiosRequestConfig, AxiosInstance } from "axios";
 //   timeout: 40000,
 // })
 
+const URL = process.env.NEXT_PUBLIC_BASE_API;
+
 const config: AxiosRequestConfig = {
-  baseURL: "http://localhost:3000/api",
+  baseURL: URL,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",

@@ -28,7 +28,7 @@ const Landing: NextPage<P> = (props) => {
     const { account, chain } = await connectAsync({
       connector: new CoinbaseWalletConnector({
         options: {
-          appName: "books.store",
+          appName: "ThirdBook",
         },
       }),
     });
